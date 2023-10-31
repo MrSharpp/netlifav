@@ -1,6 +1,10 @@
 import { UserService } from "@services";
 import { Request, Response } from "express";
 
+export function loginPage(req: Request, res: Response) {
+  return res.render("Auth/login");
+}
+
 export function loginUser(req: Request, res: Response) {}
 
 export function registerUser(req: Request, res: Response) {

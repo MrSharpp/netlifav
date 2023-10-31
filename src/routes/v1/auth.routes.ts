@@ -3,6 +3,6 @@ import expres from "express";
 
 const authRouter = expres.Router();
 
-authRouter.get("/register", AuthController.registerUser);
+authRouter.get("/register", AuthController.loginPage);
 
 export default authRouter;
