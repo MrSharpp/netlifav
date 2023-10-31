@@ -1,5 +1,8 @@
+import { AuthController } from "@controllers";
 import expres from "express";
 
-const router = expres.Router();
+const authRouter = expres.Router();
 
-router.post("/register");
+authRouter.get("/register", AuthController.registerUser);
+
+export default authRouter;
