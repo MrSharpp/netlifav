@@ -1,12 +1,14 @@
-import z from 'zod'
-import dotenv from 'dotenv'
-import path from 'path'
+import z from "zod";
+import dotenv from "dotenv";
+import path from "path";
 
-dotenv.config({path: path.join(__dirname, '..', '..', '.env')})
+dotenv.config({ path: path.join(__dirname, "..", "..", ".env") });
 
-console.log(process.env)
+const envVarsSchema = z.object({
+  NODE_ENV: z.enum(["Development", "Production"]),
+  PORT: z.string(),
+});
 
-const envVars = z.object({
-    NODE_ENV: z.enum(['Development', 'Production']),
-    PORT: z.string()
-})
+const config = envVarsSchema.parse(process.env);
+
+export { config };
