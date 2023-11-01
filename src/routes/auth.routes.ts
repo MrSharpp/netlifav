@@ -9,6 +9,6 @@ authRouter.get("/register", AuthController.registerPage);
 
 // methods
 authRouter.post("/login", AuthController.loginUser);
-authRouter.post("/register", AuthController.registerPage);
+authRouter.post("/register", AuthController.registerUser);
 
 export default authRouter;

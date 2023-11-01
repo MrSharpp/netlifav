@@ -7,6 +7,10 @@ dotenv.config({ path: path.join(__dirname, "..", "..", ".env") });
 const envVarsSchema = z.object({
   NODE_ENV: z.enum(["Development", "Production"]),
   PORT: z.string(),
+  DB_HOST: z.string(),
+  DB_USERNAME: z.string(),
+  DB_PASSWORD: z.string(),
+  ORM_LOGGING: z.boolean().default(false),
 });
 
 const config = envVarsSchema.parse(process.env);
