@@ -1,2 +1,2 @@
 export * as UserService from "./UserService";
-export * from "./SequelizeService";
+export * from "@models/SequelizeService";

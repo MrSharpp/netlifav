@@ -8,3 +8,5 @@ export const signupSchema = z.object({
     password: z.string(),
   }),
 });
+
+export type TCreateUser = z.infer<typeof signupSchema>["body"];

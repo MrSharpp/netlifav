@@ -1,7 +1,7 @@
 import { validate } from "@configs/validator";
 import { AuthController } from "@controllers";
 import expres from "express";
-import { signupSchema } from "./dtos/auth.schema";
+import { signupSchema } from "@models/dtos/auth.schema";
 
 const authRouter = expres.Router();
 

@@ -1,7 +1,5 @@
-import { sequelize } from "@services";
-import { hashPassword } from "@utils/hashPassword";
+import { sequelize } from "./SequelizeService";
 import { DataTypes, Model, Sequelize } from "sequelize";
-import { User } from "@models";
 
 export class Profile extends Model {}
 

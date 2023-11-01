@@ -2,7 +2,7 @@ import { config } from "@configs/config";
 import express from "express";
 import { router } from "@routes";
 import path from "path";
-import { sequelize } from "@services";
+import { sequelize } from "@models/SequelizeService";
 
 const app = express();
 

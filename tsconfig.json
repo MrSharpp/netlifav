@@ -36,7 +36,9 @@
       "@services": ["./src/services/index"],
       "@routes": ["./src/routes/index"],
       "@utils/*": ["./src/utils/*"],
-      "@models": ["./src/models/index"]
+      "@models": ["./src/models/index"],
+      "@models/*": ["./src/models/*"],
+      "@database/*": ["./src/database/*"]
     } /* Specify a set of entries that re-map imports to additional lookup locations. */,
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
