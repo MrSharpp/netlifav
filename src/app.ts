@@ -6,6 +6,8 @@ import { sequelize } from "@services";
 
 const app = express();
 
+app.use(express.json());
+
 // connect to db
 sequelize.sync().then(
   function () {
