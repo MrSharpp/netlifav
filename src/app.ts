@@ -14,7 +14,7 @@ sequelize.sync().then(
     console.log("DB connection success.");
   },
   function (err) {
-    console.log(JSON.stringify(err));
+    console.log(err);
   }
 );
 
