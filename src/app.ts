@@ -3,10 +3,20 @@ import express from "express";
 import { router } from "@routes";
 import path from "path";
 import { sequelize } from "@models/SequelizeService";
+import session from "express-session";
 
 const app = express();
 
 app.use(express.json());
+
+// it adds a middleware which preseves the session
+app.use(
+  session({
+    secret: config.APP_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 // connect to db
 sequelize.sync().then(

@@ -1,5 +1,5 @@
 import { Profile, User } from "@models";
-import { UserService, generateAccessToken, sequelize } from "@services";
+import { UserService, sequelize } from "@services";
 import { Request, Response } from "express";
 
 export function loginPage(req: Request, res: Response) {
@@ -24,7 +24,16 @@ export async function registerUser(req: Request, res: Response) {
 
   const user = await UserService.createUser(body);
 
-  return res.status(200).json({
-    accessToken: generateAccessToken(user.getDataValue("id")),
+  req.session.userId = user.getDataValue("id");
+
+  return res.redirect("/home");
+}
+
+export function logout(req: Request, res: Response) {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Error destroying session:", err);
+    }
+    res.redirect("/register");
   });
 }

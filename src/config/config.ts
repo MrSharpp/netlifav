@@ -11,7 +11,7 @@ const envVarsSchema = z.object({
   DB_USERNAME: z.string(),
   DB_PASSWORD: z.string(),
   ORM_LOGGING: z.boolean().default(false),
-  JWT_SEVRET: z.string(),
+  APP_SECRET: z.string(),
 });
 
 const config = envVarsSchema.parse(process.env);

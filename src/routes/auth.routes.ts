@@ -1,4 +1,4 @@
-import { validate } from "@configs/validator";
+import { validate } from "@middlewares/validator";
 import { AuthController } from "@controllers";
 import expres from "express";
 import { signupSchema } from "@models/dtos/auth.schema";
@@ -16,6 +16,6 @@ authRouter.post(
   validate(signupSchema),
   AuthController.registerUser
 );
-authRouter.post("/refresh");
+authRouter.post("/logout", AuthController.logout);
 
 export default authRouter;
