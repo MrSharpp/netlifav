@@ -6,9 +6,9 @@ export function checkAuthentication(
   next: NextFunction
 ) {
   if (!req.session.userId && !req.path.includes("/auth")) {
-    res.redirect("/auth/login");
-    return;
-  } else {
-    next();
+    return res.redirect("/auth/login");
+  } else if (req.session.userId && req.path.includes("/auth")) {
+    return res.redirect("/");
   }
+  next();
 }
