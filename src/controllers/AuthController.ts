@@ -5,11 +5,11 @@ import { hashPassword } from "@utils/hashPassword";
 import { Request, Response } from "express";
 
 export function loginPage(req: Request, res: Response) {
-  return res.render("Auth/login");
+  return res.render("Auth/login", { error: "" });
 }
 
 export function registerPage(req: Request, res: Response) {
-  return res.render("Auth/register");
+  return res.render("Auth/register", { error: "" });
 }
 
 export async function loginUser(req: Request, res: Response) {
