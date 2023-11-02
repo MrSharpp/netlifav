@@ -1,4 +1,4 @@
-import { Profile, User } from "@models";
+import { User } from "@models";
 import { loginSchema } from "@models/dtos/auth.schema";
 import { UserService, sequelize } from "@services";
 import { hashPassword } from "@utils/hashPassword";
