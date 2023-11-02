@@ -13,14 +13,25 @@
       <div class="login form">
         <header>Login</header>
         <form action="login" method="post">
-          <input type="email" name="email" placeholder="Enter your email" />
+          <input
+            type="email"
+            name="email"
+            value="<%= email ? email : '' %>"
+            placeholder="Enter your email"
+            required
+          />
           <input
             type="password"
             name="password"
             placeholder="Enter your password"
+            required
           />
+          <% if (error) { %>
+          <p class="error" style="color: red"><%= error %></p>
+          <% } %>
           <input type="submit" class="button" value="Login" />
         </form>
+
         <div class="signup">
           <span class="signup"
             >Don't have an account?

@@ -11,11 +11,7 @@ authRouter.get("/register", AuthController.registerPage);
 
 // methods
 authRouter.post("/login", AuthController.loginUser);
-authRouter.post(
-  "/register",
-  validate(signupSchema),
-  AuthController.registerUser
-);
+authRouter.post("/register", AuthController.registerUser);
 authRouter.post("/logout", AuthController.logout);
 
 export default authRouter;
