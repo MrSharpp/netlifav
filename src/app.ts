@@ -4,10 +4,20 @@ import { router } from "@routes";
 import path from "path";
 import { sequelize } from "@models/SequelizeService";
 import session from "express-session";
+import bodyParser from "body-parser";
 
 const app = express();
 
 app.use(express.json());
+
+// create application/json parser
+var jsonParser = bodyParser.json();
+
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+app.use(jsonParser);
+app.use(urlencodedParser);
 
 // it adds a middleware which preseves the session
 app.use(

@@ -11,6 +11,12 @@ export async function userExsist(email: string): Promise<boolean> {
   return count > 0;
 }
 
+export async function findUserBy(whereQuery: object) {
+  return User.findOne({
+    where: whereQuery,
+  });
+}
+
 export function createUser(body: TCreateUser & { refreshToken?: string }) {
   return User.create(
     {

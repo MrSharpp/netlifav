@@ -10,7 +10,19 @@ export function registerPage(req: Request, res: Response) {
   return res.render("Auth/register");
 }
 
-export function loginUser(req: Request, res: Response) {}
+export async function loginUser(req: Request, res: Response) {
+  const body = req.body;
+
+  console.log(body);
+
+  const user = await UserService.findUserBy({ email: body.email });
+
+  if (!user) return res.status(401).send("Unauthrozied");
+
+  req.session.userId = user.getDataValue("id");
+
+  return res.redirect("/");
+}
 
 export async function registerUser(req: Request, res: Response) {
   const body = req.body;
@@ -26,7 +38,7 @@ export async function registerUser(req: Request, res: Response) {
 
   req.session.userId = user.getDataValue("id");
 
-  return res.redirect("/home");
+  return res.redirect("/");
 }
 
 export function logout(req: Request, res: Response) {
