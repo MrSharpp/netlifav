@@ -11,7 +11,7 @@ export async function userExsist(email: string): Promise<boolean> {
   return count > 0;
 }
 
-export function createUser(body: TCreateUser) {
+export function createUser(body: TCreateUser & { refreshToken?: string }) {
   return User.create(
     {
       email: body.email,
@@ -20,9 +20,14 @@ export function createUser(body: TCreateUser) {
         firstName: body.firstName,
         lastName: body.lastName,
       },
+      refreshToken: body.refreshToken,
     },
     {
       include: Profile,
     }
   );
+}
+
+export function updateRefreshToken(rt: string, newRt: string) {
+  return User.update({ refreshToken: newRt }, { where: { refreshToken: rt } });
 }

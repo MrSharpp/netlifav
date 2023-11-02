@@ -1,5 +1,5 @@
 import { Profile, User } from "@models";
-import { UserService, sequelize } from "@services";
+import { UserService, generateAccessToken, sequelize } from "@services";
 import { Request, Response } from "express";
 
 export function loginPage(req: Request, res: Response) {
@@ -24,5 +24,7 @@ export async function registerUser(req: Request, res: Response) {
 
   const user = await UserService.createUser(body);
 
-  return res.status(200).json(user);
+  return res.status(200).json({
+    accessToken: generateAccessToken(user.getDataValue("id")),
+  });
 }

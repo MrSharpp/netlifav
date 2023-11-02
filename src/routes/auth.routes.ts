@@ -16,5 +16,6 @@ authRouter.post(
   validate(signupSchema),
   AuthController.registerUser
 );
+authRouter.post("/refresh");
 
 export default authRouter;
