@@ -1,4 +1,4 @@
-import { DashboardController } from "@controllers";
+import { AuthController, DashboardController } from "@controllers";
 import express from "express";
 import { checkAuthentication } from "@middlewares/checkAuthentication";
 
@@ -12,5 +12,6 @@ router.post("/movies", DashboardController.addMovie);
 router.post("/movies/:movieId", DashboardController.updateMovie);
 // supposed to DELETE method
 router.get("/movies/delete/:movieId", DashboardController.deleteController);
+router.post("/logout", AuthController.logout);
 
 export default router;

@@ -66,10 +66,12 @@ export async function registerUser(req: Request, res: Response) {
 }
 
 export function logout(req: Request, res: Response) {
-  req.session.destroy((err) => {
+  console.log("aa");
+  req.session.userId = null;
+  return req.session.destroy((err) => {
     if (err) {
       console.error("Error destroying session:", err);
     }
-    res.redirect("/register");
+    return res.redirect("/register");
   });
 }
