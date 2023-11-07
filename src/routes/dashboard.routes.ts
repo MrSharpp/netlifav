@@ -8,7 +8,9 @@ router.get("/", DashboardController.dashboardPage);
 router.get("/movies/edit/:movieId", DashboardController.editMoviePage);
 
 router.post("/movies", DashboardController.addMovie);
+// supposed to be PATCH method
 router.post("/movies/:movieId", DashboardController.updateMovie);
-router.post("/movies/delete/:movieId");
+// supposed to DELETE method
+router.get("/movies/delete/:movieId", DashboardController.deleteController);
 
 export default router;

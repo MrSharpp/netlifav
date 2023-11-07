@@ -54,3 +54,11 @@ export async function updateMovie(movie: TMovie, id: string) {
     { where: { id } }
   );
 }
+
+export async function deleteMovie(movieId: string) {
+  return Movie.destroy({
+    where: {
+      id: movieId,
+    },
+  });
+}

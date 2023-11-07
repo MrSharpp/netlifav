@@ -94,3 +94,13 @@ export async function updateMovie(req: Request, res: Response) {
 
   return res.redirect("/");
 }
+
+export async function deleteController(req: Request, res: Response) {
+  try {
+    await MovieService.deleteMovie(req.params.movieId);
+    return res.redirect("/");
+  } catch (err) {
+    req.error = "Something went wrong while deleting this movie";
+    return dashboardPage(req, res);
+  }
+}

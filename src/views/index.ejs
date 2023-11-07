@@ -88,7 +88,7 @@
             <td><%= movie.cast %></td>
             <td><%= movie.releaseDate %></td>
 
-            <td><a href="/movies/edit/<%= movie.id %>">Edit</a> <a href="#">Delete</a></td>
+            <td><a href="/movies/edit/<%= movie.id %>">Edit</a> <a href="/movies/delete/<%= movie.id %>">Delete</a></td>
           </tr>
           <% }); %>
         </tbody>
