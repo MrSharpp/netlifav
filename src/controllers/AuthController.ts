@@ -1,20 +1,28 @@
 import { User } from "@models";
-import { loginSchema } from "@models/dtos/auth.schema";
+import { loginSchema, signupSchema } from "@models/dtos/auth.schema";
 import { UserService, sequelize } from "@services";
 import { hashPassword } from "@utils/hashPassword";
 import { Request, Response } from "express";
 import * as bcrypt from "bcrypt";
+import { ZodError } from "zod";
 
 export function loginPage(req: Request, res: Response) {
-  return res.render("Auth/login", { error: "" });
+  return res.render("Auth/login", { error: req.error });
 }
 
 export function registerPage(req: Request, res: Response) {
-  return res.render("Auth/register", { error: "" });
+  return res.render("Auth/register", { error: req.error });
 }
 
 export async function loginUser(req: Request, res: Response) {
   const body = req.body;
+
+  const errs: ZodError = await loginSchema.parseAsync(body).catch((err) => err);
+  if (Array.isArray(errs.errors)) {
+    console.log(JSON.stringify(errs));
+    req.error = errs.errors.pop()?.message;
+    return loginPage(req, res);
+  }
 
   const user = await UserService.findUserBy({ email: body.email });
 
@@ -43,6 +51,15 @@ export async function loginUser(req: Request, res: Response) {
 
 export async function registerUser(req: Request, res: Response) {
   const body = req.body;
+
+  const errs: ZodError = await signupSchema
+    .parseAsync(body)
+    .catch((err) => err);
+  if (Array.isArray(errs.errors)) {
+    console.log(JSON.stringify(errs));
+    req.error = errs.errors.pop()?.message;
+    return registerPage(req, res);
+  }
 
   const emailExsist = await UserService.userExsist(body.email);
 

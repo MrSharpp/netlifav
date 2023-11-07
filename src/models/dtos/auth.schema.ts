@@ -1,16 +1,12 @@
 import { z } from "zod";
 
 export const signupSchema = z.object({
-  body: z.object({
-    firstName: z.string(),
-    lastName: z.string(),
-    email: z.string().email(),
-    password: z.string(),
-  }),
+  email: z.string().email({ message: "Email should be valid" }),
+  password: z.string(),
 });
 
 export const loginSchema = z.object({
-  email: z.string(),
+  email: z.string().email({ message: "Email should be valud" }),
   password: z.string(),
 });
 
