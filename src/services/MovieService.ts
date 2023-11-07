@@ -22,6 +22,22 @@ type TMovie = {
   release: string;
 };
 
+export async function findAllMovies(UserId: string) {
+  return Movie.findAll({
+    where: {
+      UserId,
+    },
+  });
+}
+
+export async function findMovieById(movieId: string) {
+  return Movie.findOne({
+    where: {
+      id: movieId,
+    },
+  });
+}
+
 export async function createMovie(movie: TMovie, UserId: string) {
   return Movie.create({
     name: movie.name,

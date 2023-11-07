@@ -1,14 +1,27 @@
-import { Movie } from "@models";
 import { MovieService } from "@services";
 import { Request, Response, request } from "express";
+import { z } from "zod";
 
 export async function dashboardPage(req: Request, res: Response) {
-  const movies = await Movie.findAll({
-    where: {
-      UserId: req.session.userId,
-    },
-  });
+  const movies = await MovieService.findAllMovies(req.session.userId);
   return res.render("index", { movies, error: "" });
+}
+
+export async function editMoviePage(req: Request, res: Response) {
+  if (
+    !(await z
+      .string()
+      .uuid()
+      .parseAsync(req.params.movieId)
+      .catch(() => false))
+  )
+    return res.redirect("back");
+
+  const movie = await MovieService.findMovieById(req.params.movieId);
+
+  if (!movie) res.redirect("back");
+
+  return res.render("edit-movie", { ...movie, error: "" });
 }
 
 export async function addMovie(req: Request, res: Response) {
