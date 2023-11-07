@@ -71,6 +71,11 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Movie</th>
+            <th scope="col">Ratings</th>
+            <th scope="col">Casts</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Release Date</th>
+
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -79,7 +84,11 @@
           <tr>
             <th scope="row"><%= index %></th>
             <td><%= movie.name %></td>
-            <td><a href="">Edit</a> <a href="#">Delete</a></td>
+            <td><%= movie.ratings %></td>
+            <td><%= movie.cast %></td>
+            <td><%= movie.releaseDate %></td>
+
+            <td><a href="/movies/edit/<%= movie.id %>">Edit</a> <a href="#">Delete</a></td>
           </tr>
           <% }); %>
         </tbody>

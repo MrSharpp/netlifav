@@ -33,6 +33,7 @@ export async function loginUser(req: Request, res: Response) {
     return res.render("Auth/login", {
       email: "",
       password: "Incorrect password",
+      error: "",
     });
 
   req.session.userId = user.getDataValue("id");

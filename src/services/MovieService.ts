@@ -19,7 +19,7 @@ type TMovie = {
   ratings: number;
   genre: string;
   casts: string;
-  release: string;
+  releaseDate: string;
 };
 
 export async function findAllMovies(UserId: string) {
@@ -40,11 +40,16 @@ export async function findMovieById(movieId: string) {
 
 export async function createMovie(movie: TMovie, UserId: string) {
   return Movie.create({
-    name: movie.name,
-    ratings: movie.ratings,
-    cast: movie.casts,
-    releaseDate: movie.release,
-    genre: movie.genre,
+    ...movie,
     UserId,
   });
+}
+
+export async function updateMovie(movie: TMovie, id: string) {
+  return Movie.update(
+    {
+      ...movie,
+    },
+    { where: { id } }
+  );
 }
