@@ -24,9 +24,6 @@ Movie.init(
       get(): string[] {
         return this.getDataValue("cast").split(",");
       },
-      set(casts: string[]) {
-        this.setDataValue("cast", casts.join(","));
-      },
     },
     genre: {
       // i can create an index to optimize and query by genre

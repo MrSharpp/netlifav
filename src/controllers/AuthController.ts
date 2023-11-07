@@ -3,6 +3,7 @@ import { loginSchema } from "@models/dtos/auth.schema";
 import { UserService, sequelize } from "@services";
 import { hashPassword } from "@utils/hashPassword";
 import { Request, Response } from "express";
+import * as bcrypt from "bcrypt";
 
 export function loginPage(req: Request, res: Response) {
   return res.render("Auth/login", { error: "" });
@@ -23,10 +24,15 @@ export async function loginUser(req: Request, res: Response) {
       email: "",
     });
 
-  if (user.getDataValue("password") != hashPassword(body.password))
+  const isValid = await bcrypt.compare(
+    body.password,
+    user.getDataValue("password")
+  );
+
+  if (!isValid)
     return res.render("Auth/login", {
-      error: "Incorrect password",
-      email: body.email,
+      email: "",
+      password: "Incorrect password",
     });
 
   req.session.userId = user.getDataValue("id");
