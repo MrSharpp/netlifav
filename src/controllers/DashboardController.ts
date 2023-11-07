@@ -5,6 +5,7 @@ import { ZodError, z } from "zod";
 
 export async function dashboardPage(req: Request, res: Response) {
   const movies = await MovieService.findAllMovies(req.session.userId);
+  console.log(movies);
   return res.render("index", { movies, error: req.error || "" });
 }
 
@@ -28,28 +29,40 @@ export async function editMoviePage(req: Request, res: Response) {
 export async function addMovie(req: Request, res: Response) {
   const body = req.body;
 
-  if (body.name.length < 3)
-    return res.render("index", {
-      error: "Movie name must be longer then 3 characters",
-    });
+  const errs: ZodError = await movieSchema.parseAsync(body).catch((err) => err);
+  if (Array.isArray(errs.errors)) {
+    console.log(JSON.stringify(errs));
+    req.error = errs.errors.pop()?.message;
+    return dashboardPage(req, res);
+  }
 
   const isExsist = await MovieService.movieExsist(
     body.name,
     req.session.userId
   );
 
-  if (isExsist)
-    return res.render("index", {
-      error: "Movie already exsist",
-    });
+  if (isExsist) {
+    req.error = "Movie with this name already exsist";
+    return dashboardPage(req, res);
+  }
 
   try {
-    await MovieService.createMovie(body, req.session.userId);
+    await MovieService.createMovie(
+      {
+        name: body.name,
+        cast: body.casts,
+        genre: body.genre,
+        ratings: body.ratings,
+        releaseDate: body.release,
+      },
+      req.session.userId
+    );
     return res.redirect("/");
   } catch (err) {
     console.log(err);
     return res.render("index", {
       error: "Something went wrong while adding movie",
+      movies: [],
     });
   }
 }

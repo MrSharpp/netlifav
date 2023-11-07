@@ -18,7 +18,7 @@ type TMovie = {
   name: string;
   ratings: number;
   genre: string;
-  casts: string;
+  cast: string;
   releaseDate: string;
 };
 
@@ -27,6 +27,7 @@ export async function findAllMovies(UserId: string) {
     where: {
       UserId,
     },
+    order: [["ratings", "DESC"]],
   });
 }
 
