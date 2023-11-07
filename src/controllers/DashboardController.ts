@@ -3,7 +3,11 @@ import { MovieService } from "@services";
 import { Request, Response, request } from "express";
 
 export async function dashboardPage(req: Request, res: Response) {
-  const movies = await Movie.findAll();
+  const movies = await Movie.findAll({
+    where: {
+      UserId: req.session.userId,
+    },
+  });
   return res.render("index", { movies, error: "" });
 }
 
@@ -27,7 +31,7 @@ export async function addMovie(req: Request, res: Response) {
 
   try {
     await MovieService.createMovie(body, req.session.userId);
-    return res.render("index", { error: "" });
+    return dashboardPage(req, res);
   } catch (err) {
     console.log(err);
     return res.render("index", {

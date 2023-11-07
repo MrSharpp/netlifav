@@ -87,11 +87,13 @@
           </tr>
         </thead>
         <tbody>
+          <% movies.forEach(function(movie, index) { %>
           <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
+            <th scope="row"><%= index %></th>
+            <td><%= movie.name %></td>
             <td><a href="">Edit</a> <a href="#">Delete</a></td>
           </tr>
+          <% }); %>
         </tbody>
       </table>
     </div>
