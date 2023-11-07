@@ -5,7 +5,6 @@ import { ZodError, z } from "zod";
 
 export async function dashboardPage(req: Request, res: Response) {
   const movies = await MovieService.findAllMovies(req.session.userId);
-  console.log(movies);
   return res.render("index", { movies, error: req.error || "" });
 }
 
